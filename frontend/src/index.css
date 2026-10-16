@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* =====================================================================
+   ARGYA HEALTH — same purple look as Atithi RMS
+   (the token names stay the same so every screen changes together)
+   ===================================================================== */
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  --color-ink: #1e003a;        /* dark text / dark panels */
+  --color-ink-2: #2d0a52;
+  --color-green: #9333ea;      /* main purple (buttons, links) */
+  --color-green-dark: #7e22ce;
+  --color-glow: #c084fc;       /* light purple on dark backgrounds */
+  --color-mint: #f3e8ff;       /* soft purple surfaces */
+  --color-paper: #fbfaff;      /* page background */
+  --color-foil: #e7e0f3;       /* borders */
+  --color-amber: #f59e0b;
+  --color-danger: #e11d48;
+
+  /* The older Patient / EMR screens use "teal" classes — now purple, like RMS */
+  --color-teal-50: #faf5ff;
+  --color-teal-100: #f3e8ff;
+  --color-teal-200: #e9d5ff;
+  --color-teal-300: #d8b4fe;
+  --color-teal-400: #c084fc;
+  --color-teal-500: #a855f7;
+  --color-teal-600: #9333ea;
+  --color-teal-700: #7e22ce;
+  --color-teal-800: #6b21a8;
+  --color-teal-900: #581c87;
+
+  --animate-fade-in: fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-scale-in: scale-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-up: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scale-in { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+@keyframes slide-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--color-green) 45%, transparent); outline-offset: 2px; border-radius: 6px; }
+
+/* Numbers in tables line up */
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Hide arrows on number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; appearance: textfield; }
+
+/* Thin scrollbars inside panels */
+.scroll-thin { scrollbar-width: thin; scrollbar-color: var(--color-foil) transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
