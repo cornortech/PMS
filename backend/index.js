@@ -23,13 +23,16 @@ app.disable("x-powered-by");
 app.use(helmet());
 
 // Only these websites may call the API from a browser.
-// Render → Environment → ALLOWED_ORIGINS = https://your-site.vercel.app,https://www.yourdomain.com
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || "https://pharmacy-management-system-ramitnpns-projects.vercel.app,https://pms-seven-jet.vercel.app/")
-    .split(",").map((o) => o.trim()).filter(Boolean);
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || "https://pharmacy-management-system-ramitnpns-projects.vercel.app,https://pms-seven-jet.vercel.app")
+    .split(",")
+    .map((o) => o.trim().replace(/\/$/, "")) // Removes trailing slash if any exists
+    .filter(Boolean);
 
 app.use(cors({
     origin(origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+        // Also normalize incoming origin just in case
+        const cleanOrigin = origin ? origin.replace(/\/$/, "") : origin;
+        if (!origin || allowedOrigins.includes(cleanOrigin)) return callback(null, true);
         return callback(null, false); // not allowed → the browser blocks it
     },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
