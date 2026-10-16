@@ -24,7 +24,7 @@ app.use(helmet());
 
 // Only these websites may call the API from a browser.
 // Render → Environment → ALLOWED_ORIGINS = https://your-site.vercel.app,https://www.yourdomain.com
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || "https://pharmacy-management-system-ramitnpns-projects.vercel.app,http://localhost:5173")
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || "https://pharmacy-management-system-ramitnpns-projects.vercel.app,https://pms-seven-jet.vercel.app/")
     .split(",").map((o) => o.trim()).filter(Boolean);
 
 app.use(cors({
